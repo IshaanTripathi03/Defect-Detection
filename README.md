@@ -1,153 +1,105 @@
-# 🛠️ HAL Parts Defect Detection System
+# 🛠️ Industrial Vision Defect Detection — **Demo Version**
 
-An AI-powered web application for **automated defect detection in aircraft parts**, developed for **Hindustan Aeronautics Limited (HAL)**.  
-The system combines **deep learning (YOLOv8)**, **SSIM-based image comparison**, and **deep image alignment (SuperPoint, SIFT, ORB)** to identify surface defects with aerospace-grade precision.
+An AI-assisted **computer vision demo** showcasing how automated defect detection can be applied in industrial quality inspection.
+This demo illustrates core concepts such as **object detection**, **image similarity analysis**, and **visual reporting** that are commonly used in modern manufacturing environments.
 
----
-
-## ✨ Key Highlights
-
-🔹 Detect defects using **both image comparison & deep learning**  
-🔹 Upload **multiple reference & multiple test images** for multi-angle inspection  
-🔹 Optional upload of **custom YOLOv8 model (.pt)** for specialized defect categories  
-🔹 **Visual and tabular reports** for every (reference, test) pair  
-🔹 **Side-by-side comparison** of annotated output for SSIM & YOLO  
-🔹 **Downloadable CSV** (pair-wise and summary)  
-🔹 **Configurable detection sensitivity** from the sidebar  
-🔹 **Government-grade UI**, disclaimers & secure workflow  
+> ⚠ **Confidentiality Notice**
+> This repository is a **concept demonstration inspired by industrial workflows**.
+> It is **NOT** the original project developed during internship, and **does not contain any proprietary code, dataset, UI, internal logic, or implementation details** from that engagement due to confidentiality policies.
 
 ---
 
-## 🧠 Core Features
+## ✨ What This Demo Showcases
 
-| Feature | Description |
-|--------|-------------|
-| SSIM Defect Detection | Pixel-level similarity comparison with defect heatmaps |
-| YOLOv8 Deep Learning | Bounding box detection, labels & confidence scores |
-| Deep Alignment | Corrects rotation/zoom using SuperPoint → SIFT → ORB → Template |
-| Color Detection | LAB / DeltaE scoring for subtle surface tone changes |
-| Pattern Matching | ORB pattern difference detection |
-| Reporting | Download CSV (per-pair & summary) |
+* **Image-based defect detection** using comparison thresholds
+* **Object detection demo (YOLO-based example)**
+* **Sensitivity controls** to simulate real inspection adjustments
+* **Visual annotations** for potential defect regions
+* **Downloadable reports for analysis**
+
+This demo focuses on skill demonstration — not production deployment.
 
 ---
 
-## 📂 Project Structure (Conceptual)
+## 🧠 Conceptual Workflow
+
+| Step                    | Concept                 | Purpose                        |
+| ----------------------- | ----------------------- | ------------------------------ |
+| Preprocessing           | Resize, grayscale, blur | Normalize inspection input     |
+| Image Similarity        | Threshold + contours    | Spot pixel discrepancies       |
+| Object Detection (Demo) | YOLO inference          | Detect visible defect patterns |
+| Reporting               | CSV summary             | Export output for QC           |
+
+---
+
+## 🧩 Project Structure
 
 ```
-
-HAL-Defect-Detection/
+industrial-vision-defect-detector-demo/
 │
-├── M.py                  # Classic UI
-├── Main.py               # Enhanced UI + better logging & UX
-├── hal_logo.png
-├── requirement.txt
-└── (first-run auto) superpoint_v1.pth
-
-````
-
-> **Both `M.py` and `Main.py` provide the complete workflow.**  
-> `Main.py` offers richer interaction, feedback & logging; `M.py` is a streamlined interface.
-
----
-
-## 📦 Requirements
-
-See `requirement.txt` for the full dependency list.
-
-Additional notes:
-- `torch` is required for **SuperPoint** deep alignment (auto-downloads weights on first run)
-- Recommended Python version: **3.8 – 3.11**
-- Python **3.12+ may fail** due to unbuilt wheels for OpenCV/Torch
-
----
-
-## ⚙️ Installation Guide
-
-```bash
-# 1. Create virtual environment
-python -m venv venv
-
-# Activate
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-
-# 2. Install dependencies
-pip install -r requirement.txt
-````
-
-Verify installations:
-
-```bash
-python --version
-pip show streamlit opencv-python torch ultralytics scikit-image
+├── sample_images/             # Public images used for demo only
+├── Final.py                    # Core demonstration script
+└── requirements.txt           # Dependencies for demo
 ```
 
 ---
 
-## ▶️ Run the Application
-
-### Option 1 – Classic UI
+## ⚙ Installation & Setup
 
 ```bash
-streamlit run M.py
-```
-
-### Option 2 – Enhanced UI (recommended)
-
-```bash
-streamlit run Main.py
+git clone https://github.com/yourusername/industrial-vision-defect-detector-demo.git
+cd industrial-vision-defect-detector-demo
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📝 Usage Instructions
+## ▶️ Running the Demo
 
-1. Upload **one or more reference images** (defect-free component)
-2. Upload **one or more test images** (to be inspected)
-3. (Optional) Upload **custom YOLOv8 `.pt` model**
-4. Adjust **SSIM sensitivity, color threshold, pattern threshold & YOLO confidence**
-5. Toggle detection modules:
+```bash
+python demo.py
+```
 
-   * 🔲 Color / DeltaE
-   * 🔲 Pattern / ORB
-   * 🔲 YOLOv8 deep detection
-6. Review:
+If implementing a Streamlit demo version:
 
-   * **SSIM heatmap & bounding contours**
-   * **YOLO detected bounding boxes**
-   * **Summary & detailed tables**
-7. Download **CSV defect reports**
+```bash
+streamlit run app.py
+```
 
 ---
 
-## 🧠 Approach & Algorithms
+## 📌 Purpose of This Repository
 
-| Step            | Algorithms                                    | Libraries            |
-| --------------- | --------------------------------------------- | -------------------- |
-| Alignment       | SuperPoint → SIFT → ORB → Template Matching   | Torch, OpenCV        |
-| Similarity      | SSIM + adaptive threshold + contour detection | Scikit-image, OpenCV |
-| Deep Learning   | YOLOv8                                        | Ultrayltics          |
-| Color Defects   | ΔE LAB scoring                                | OpenCV               |
-| Pattern Defects | ORB                                           | OpenCV               |
-| Reporting       | DataFrame + CSV                               | pandas               |
+This repository serves as:
 
-The system warns the user if alignment confidence is low and logs difficult cases for operator review.
+* A **portfolio demonstration** of computer vision expertise
+* A safe representation of industrial defect analysis concepts
+* A talking point for interviews and collaboration
+* A foundation for future exploration in CV, ML & automation
 
 ---
 
-## 🔐 Disclaimer
+## 🔐 Professional Confidentiality Statement
 
-> This is an **official government-grade application**.
-> Unauthorized access or misuse is strictly prohibited and may be punishable under applicable law.
-> Images uploaded are processed **only for defect detection** and are **not stored permanently**.
+> The original implementation built during internship remains confidential and proprietary to the organization.
+> This repository **does not include original architecture, codebase, datasets, or internal UI.**
+> All content provided here is **for educational and demonstration purposes only.**
 
 ---
 
-## 🏛️ About HAL
+## 🧠 Interview Explanation (Use This)
 
-**Hindustan Aeronautics Limited (HAL)** is an Indian state-owned aerospace and defence corporation engaged in the design, development, and manufacture of aircraft, jet engines, helicopters, and related components.
+> “I created a confidential industrial defect detection system during internship, and this repo is a **neutral demo version** to showcase the core concepts, computer vision skills, and problem-solving approach.”
+
+---
+
+## 🧭 Future Enhancements
+
+* Real-time streaming pipeline
+* Improved noise rejection on metallic surfaces
+* Edge-device optimization (Jetson, Coral, Pi)
+* Integration with deep learning deployment frameworks
+* Confidence-based automatic reinspection triggers
 
 ---
 
@@ -158,10 +110,6 @@ This project was collaboratively developed by:
 * **Ishaan Tripathi**
 * **Abhiyanshu Anand**
 
-
 ---
 
-## ⭐ If you find this project useful
-
-Please consider giving the repository a **star** on GitHub — it helps support development and visibility of public research projects.
-
+⭐ **If this demo was useful, please consider starring the repository!**
